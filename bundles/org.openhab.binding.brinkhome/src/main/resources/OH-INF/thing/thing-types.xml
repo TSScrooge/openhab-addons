@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="brinkhome"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
+
+	<!-- Sample Thing Type -->
+	<bridge-type id="brinkhomeaccount">
+		<!-- Comment this in for Things which need a Bridge to function.
+			<supported-bridge-type-refs>
+			<bridge-type-ref id="brinkHomeBridge" />
+			</supported-bridge-type-refs>
+		-->
+
+		<label>BrinkHome Binding Account</label>
+		<description>BrinkHome Binding Account Bridge</description>
+		<config-description>
+			<parameter name="username" type="text" required="true">
+				<label>Email</label>
+				<description>email of Brink Home Account</description>
+			</parameter>
+			<parameter name="password" type="text" required="true">
+				<context>password</context>
+				<label>Password</label>
+				<description>Password of Brink Home Account</description>
+			</parameter>
+		</config-description>
+	</bridge-type>
+
+	<thing-type id="ventilationdevice">
+		<supported-bridge-type-refs>
+			<bridge-type-ref id="brinkhomeaccount"/>
+		</supported-bridge-type-refs>
+
+		<label>Brink Ventilation Device</label>
+		<description>Thing for Brink Ventilation Device</description>
+
+		<channels>
+			<channel id="ventilationSpeed" typeId="ventilationSpeed-channel"/>
+			<channel id="operationMode" typeId="operationMode-channel"/>
+			<channel id="remainingTime" typeId="remainingTime-channel"/>
+			<channel id="bypassValveStatus" typeId="bypassValveStatus-channel"/>
+			<channel id="filterStatus" typeId="filterStatus-channel"/>
+		</channels>
+
+		<config-description>
+			<parameter name="systemId" type="text" required="true">
+				<context>str</context>
+				<label>SystemID</label>
+				<description>SystemID of the device</description>
+			</parameter>
+			<parameter name="gatewayId" type="text" required="true">
+				<context>str</context>
+				<label>GatewayID</label>
+				<description>GatewayID of the device</description>
+			</parameter>
+			<parameter name="pollingInterval" type="integer" required="true">
+				<label>Refresh Interval</label>
+				<description>Interval the device is polled in sec.</description>
+			</parameter>
+		</config-description>
+	</thing-type>
+
+
+	<channel-type id="ventilationSpeed-channel">
+		<item-type>String</item-type>
+		<label>Ventilation Speed</label>
+		<description>Fan speed</description>
+		<state readOnly="false">
+			<options>
+				<option value="0">50 m³/h</option>
+				<option value="1">150 m³/h</option>
+				<option value="2">270 m³/h</option>
+				<option value="3">400 m³/h</option>
+			</options>
+		</state>
+	</channel-type>
+
+	<channel-type id="operationMode-channel">
+		<item-type>String</item-type>
+		<label>Ventilation Operation Mode</label>
+		<description>Ventilation Operation Mode</description>
+		<state readOnly="false">
+			<options>
+				<option value="0">Auto</option>
+				<option value="1">Manual</option>
+				<option value="2">Vacation</option>
+				<option value="3">Party</option>
+				<option value="4">Night</option>
+			</options>
+		</state>
+	</channel-type>
+
+	<channel-type id="filterStatus-channel">
+		<item-type>String</item-type>
+		<label>Filter Status</label>
+		<description>Air Filter Status</description>
+		<state readOnly="true">
+			<options>
+				<option value="0">Not dirty</option>
+				<option value="1">Dirty</option>
+			</options>
+		</state>
+	</channel-type>
+
+</thing:thing-descriptions>
