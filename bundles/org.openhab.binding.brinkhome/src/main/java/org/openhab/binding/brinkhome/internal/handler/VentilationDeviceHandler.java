@@ -126,13 +126,13 @@ public class VentilationDeviceHandler extends BaseThingHandler {
     private synchronized void updateChannels(Value parameterValue) {
         switch (parameterValue.getValueId()) {
             case 242083:
-                updateState(CHANNEL_VENTILATION_SPEED, new StringType(parameterValue.getValue()));
+                updateState(CHANNEL_VENTILATION_SPEED, new StringType(parameterValue.getValue().toString()));
                 break;
             case 242084:
-                updateState(CHANNEL_OPERATION_MODE, new StringType(parameterValue.getValue()));
+                updateState(CHANNEL_OPERATION_MODE, new StringType(parameterValue.getValue().toString()));
                 break;
             case 242116:
-                updateState(CHANNEL_FILTER_STATUS, new StringType(parameterValue.getValue()));
+                updateState(CHANNEL_FILTER_STATUS, new StringType(parameterValue.getValue().toString()));
                 break;
             default:
                 break;
